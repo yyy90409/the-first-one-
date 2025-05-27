@@ -28,6 +28,7 @@ current_set = questions if st.session_state.mode == "全部题目" else st.sessi
 if not current_set:
     st.warning("没有题目可显示")
     st.stop()
+jump_to = st.number_input("🔎 跳转到题号（总编号）", min_value=1, max_value=len(current_set), step=1)
 
 q_index = st.session_state.current
 q = current_set[q_index]
@@ -79,7 +80,6 @@ with col2:
     if st.button("下一题") and q_index < len(current_set) - 1:
         st.session_state.current += 1
 
-jump_to = st.number_input("🔎 跳转到题号（总编号）", min_value=1, max_value=len(current_set), step=1)
 if st.button("跳转"):
     st.session_state.current = jump_to - 1
 
