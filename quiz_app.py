@@ -75,23 +75,24 @@ col1, col2 = st.columns(2)
 with col1:
     if st.button("上一题") and q_index > 0:
         st.session_state.current -= 1
-        st.experimental_rerun()
+        safe_rerun()
 with col2:
     if st.button("下一题") and q_index < len(current_set) - 1:
         st.session_state.current += 1
-        st.experimental_rerun()
+        safe_rerun()
 
 jump_to = st.number_input("🔎 跳转到题号（总编号）", min_value=1, max_value=len(questions), step=1)
 if st.button("跳转"):
     st.session_state.current = jump_to - 1
-    st.experimental_rerun()
+    safe_rerun()
 
 st.markdown("---")
 mode = st.radio("选择模式：", ["全部题目", "错题回顾"], horizontal=True)
 if mode != st.session_state.mode:
     st.session_state.mode = mode
     st.session_state.current = 0
-    st.experimental_rerun()
+    safe_rerun()
+
 
 st.markdown("---")
 st.write(f"📊 当前进度：{st.session_state.current + 1} / {len(current_set)}")
