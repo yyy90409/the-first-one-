@@ -33,7 +33,7 @@ q_index = st.session_state.current
 q = current_set[q_index]
 q_key = f"{q['section']}_{q['section_index']}"
 
-st.title("马原刷题系统（跳转+强锁题号）")
+st.title("马原刷题系统")
 st.subheader(f"{q['section']} 第{q['section_index']}题（总第{q['number']}题）")
 st.markdown(q["question"])
 
@@ -79,7 +79,7 @@ with col2:
     if st.button("下一题") and q_index < len(current_set) - 1:
         st.session_state.current += 1
 
-jump_to = st.number_input("🔎 跳转到题号（总编号）", min_value=1, max_value=len(filtered_data), step=1)
+jump_to = st.number_input("🔎 跳转到题号（总编号）", min_value=1, max_value=len(current_set), step=1)
 if st.button("跳转"):
     st.session_state.current = jump_to - 1
 
